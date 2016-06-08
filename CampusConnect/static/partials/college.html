@@ -1,0 +1,42 @@
+ <style type="text/css">
+         .colorb:hover{
+         background-color: #F5D357 !important;
+         }
+         .colorb:active{
+         background-color: #F5D357 !important;
+         }
+</style>
+
+<div ng-controller = "CollegeCtrl" ng-init = "init()">
+   <div class="page-header">
+      <h2 style="text-align:center;" ng-bind = "collegeName"></h2>
+   </div>
+   <div class="row">
+      <div class="col-md-3 col-md-offset-1">
+         <div style="text-align:center;">
+            <span aria-hidden="true" style="font-size:50px;"><img src = "img/calendar.png"/></span>
+            <br/>
+            <br/>
+            <div style="font-size:20px;">
+            <p style="text-align:center;" ng-bind = "no_of_events"></p>
+            <p style="text-align:center;">Events Happening Today</p>
+         </div>
+         
+         <button type="button" class="btn btn-info colorb" style="background-color:transparent;border-color:black;color:black;" ng-click='go("/calendar")'>Calendar</button>
+         </div>   
+      </div>
+      <div class="col-md-3 col-md-offset-3">
+         <div style="text-align:center;">
+            <span aria-hidden="true" style="font-size:50px;"><img src = "img/groups.png"/></span>
+            <br/>
+            <br/>
+         <div style="font-size:20px;">
+            <p style="text-align:center;" ng-bind = "no_of_groups"></p>
+            <p style="text-align:center;">Groups On Campus</p>
+         </div>
+         <button type="button" class="btn btn-success colorb" style="background-color:transparent;border-color:black;color:black;" ng-click='go("/groups")'>Explore Groups</button></a>
+         </div>
+         
+      </div>
+   </div>
+</div>

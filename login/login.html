@@ -1,0 +1,53 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../style/login.css"/>
+<link rel="stylesheet" type="text/css" href="../style/style_1.css"/>
+<link rel="stylesheet" type="text/css" href="../style/font-awesome.min.css"/>
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.css"/>
+</head>
+<style>
+
+
+</style>
+<script>
+function f()
+{
+	//alert(document.getElementById("username").value);
+	
+	//alert(document.getElementById("password").value);
+}
+</script>
+<body>
+  <div class="wrapper">
+    <div class="login">
+      <p>Log In</p>
+	  	  <form role="form" action = "../index/index.html" method ="post" >
+      <input id="college" type="text" value=""  name="college" placeholder="I'm in College/University"/>
+      <select value=""  name="year" placeholder="year" class="year">
+	  <option value="Year" style="color:#ccc">Year</option>
+	  <option value= "2016">2016</option>
+	  <option value="2017">2017</option>
+	  <option value="2017">2018</option>
+	  <option value="2017">2019</option>
+	  <option value="2017">2020</option>
+	  <option value="2017">2021</option>
+	  </select>
+	  &nbsp&nbsp
+	  <select value=""  name="branch" placeholder="Branch" class="branch">
+	  <option value="Branch" style="color:#ccc">Branch</option>
+	  <option value="CS" id="branch"><center>CS</center></option>
+	  <option value="ECE" id="branch">ECE</option>
+	  <option value="MECH" id="branch">MECH</option>
+	  <option value="CIVIL" id="branch">CIVIL</option>
+	  <option value="EEE" id="branch">EEE</option>
+	  <option value="BIOTECH" id="branch">BIOTECH</option>
+	  </select>
+      <button id="submitBtn" type="submit" name="submit" onclick="f()">Submit</button>
+      <p id="error" style="color:red;display:none; ">*Enter valid branch and year</p>
+    </div>
+    </form>
+  </div>
+</body>
+</html>

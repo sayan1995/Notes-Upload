@@ -1,0 +1,196 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.0.201604172/pdfobject.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.0.201604172/pdfobject.min.js"></script>
+</head>
+<style>
+.upload-select-title{
+width:500px;height:250px;
+}
+.modal-title{
+font-size:20px;
+}
+#select1{
+width:310px;
+height:34px;
+}
+.continue,.continue:hover;.continue:focus{
+background-color:#37BC61;
+border-color:#37BC61;
+margin-left: 82px;
+width:310px;
+color:white;
+}
+.continue:hover{
+color:white;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: blue;
+    cursor: inherit;
+    display: block;
+}
+.course{
+color:#37BC61;
+margin-left: 180px;
+}
+.course-content{
+width:800px;
+}
+.course-button,.course-button:hover,.course-button:focus{
+background-color:#37BC61;
+border-color:#37BC61;
+margin-left: 82px;
+width:210px;
+color:white;
+}
+#dept-select{
+width:100px;
+height:40px;
+}
+#year1-select{
+width:100px;
+height:40px;
+}
+#sem-select{
+width:100px;
+height:40px;
+}
+#prof-select{
+width:100px;
+height:40px;
+}
+#course-select{
+width:100px;
+height:40px;
+}
+</style>
+<body>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#uploadModal">
+  Launch demo modal
+</button>
+<div class="modal fade" id="courses" tabindex="-1" role="dialog" aria-labelledby="course" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content course-content" >
+		<div class="row" style="margin-top:15px;">
+		   <div class="col-xs-6 col-xs-offset-5">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left:10px;"><span aria-hidden="true">X</span></button>
+        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+			</div>
+		</div>	
+		<br>
+        <h4 class="modal-title" id="course" ><center><b>&nbsp Add Course</b></center></h4>
+      <br>
+      <div class="modal-body">
+	  <div class="row">
+	    <div class="col-xs-1"></div>
+	   <div class="col-xs-2">
+        <select id="dept-select" value=""  name="year" placeholder="year" class="year">
+	  <option value="My" style="color:#ccc">Department</option>
+	   <option value="CS" id="branch"><center>CS</center></option>
+	  <option value="ECE" id="branch">ECE</option>
+	  <option value="MECH" id="branch">MECH</option>
+	  <option value="CIVIL" id="branch">CIVIL</option>
+	  <option value="EEE" id="branch">EEE</option>
+	  <option value="BIOTECH" id="branch">BIOTECH</option>
+	  </select>
+      </div>
+	  
+	   <div class="col-xs-2">
+        <select id="course-select" value=""  name="year" placeholder="year" class="year">
+	  <option value="My" style="color:#ccc">Course</option>
+	  <option value= "CHEMISTRY-101">CHEMISTRY-101</option>
+	  <option value="PHYSICS-101">PHYSICS-101</option>
+	  <option value="ALGORITHIMS-101">ALGORITHIMS-101</option>
+	  <option value="DATA STRUCTURES">DATA STRUCTURES</option>
+	  </select>
+      </div>
+	  
+	   <div class="col-xs-2">
+        <select id="year1-select" value=""  name="year" placeholder="year" class="year">
+	  <option value="My" style="color:#ccc">Year</option>
+	  <option value= "2016">2016</option>
+	  <option value="2017">2017</option>
+	  <option value="2017">2018</option>
+	  <option value="2017">2019</option>
+	  <option value="2017">2020</option>
+	  <option value="2017">2021</option>
+	  </select>
+      </div>
+	  
+	   <div class="col-xs-2">
+        <select id="sem-select" value=""  name="year" placeholder="year" class="year">
+	  <option value="My" style="color:#ccc">Sem</option>
+	  <option value= "odd">ODD</option>
+	  <option value="even">EVEN</option>
+	  </select>
+      </div>
+	  
+	   <div class="col-xs-2">
+        <input type="text" id="prof-select" value=""  name="year" placeholder="Professor" class="year">
+	 
+      </div>
+	  </div>
+	  <br><br>
+	  <div class="modal-footer">
+	   <div class="col-xs-6 col-xs-offset-2">
+		<div class="row">
+        <button type="button" class="btn btn-file course-button">Add Course</button>
+	    </div>
+	  </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content upload-select-title" >
+      
+        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+		<br><br>
+        <h4 class="modal-title " id="myModalLabel" ><center><b>&nbsp Choose Course</b></center></h4>
+      <br>
+      <div class="modal-body">
+	  <div class="row">
+	   <div class="col-xs-3 col-xs-offset-2 ">
+        <select id="select1" value=""  name="year" placeholder="year" class="year">
+	  <option value="My" style="color:#ccc">My Courses</option>
+	  <option value= "CHEMISTRY-101">CHEMISTRY-101</option>
+	  <option value="PHYSICS-101">PHYSICS-101</option>
+	  <option value="ALGORITHIMS-101">ALGORITHIMS-101</option>
+	  <option value="DATA STRUCTURES">DATA STRUCTURES</option>
+	  </select>
+      </div>
+	  </div>
+	  <br>
+        <button type="button" class="btn btn-file continue" style="background-color:#37BC61;border-color:#37BC61;margin-left: 82px;width:310px;color:white;">Upload
+		<input type="file"/></button>
+	  <br><br>
+	  <a href="#courses" class="course" data-toggle="modal" data-target="#courses" data-dismiss="modal"> Add a new course</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+application: campusconnectwww
+version: 3
+runtime: python
+api_version: 1
+threadsafe: yes
+
+handlers:     
+
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /js
+  static_dir: static/js
+
+- url: /img
+  static_dir: static/img
+
+- url: /css
+  static_dir: static/bootstrap/css
+
+- url: /fonts
+  static_dir: static/fonts
+
+- url: /partials
+  static_dir: static/partials
+
+- url: /college+
+  static_files: templates/index.html
+  upload: templates/index\.html
+
+- url: /about
+  static_files: templates/about.html
+  upload: templates/about.html
+
+- url: /kmc_scoreboard
+  static_files: templates/kmc_scoreboard.html
+  upload: templates/kmc_scoreboard.html
+
+- url: /
+  static_files: templates/home.html
+  upload: templates/home\.html

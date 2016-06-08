@@ -1,0 +1,30 @@
+<html>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="jquery.endless-scroll.js"></script>
+   <script type="text/javascript" src="jscroll/jquery.jscroll.js"></script>
+<script>
+function setScrolling(selector) {
+    $(window).unbind("scroll");
+
+
+    scroller= $(selector).jscroll({
+        loadingHtml: '<img src="/images/loader.gif" alt="Loading" /> Loading...',
+        padding: 20,
+        nextSelector:' next-selector:last ' // This part is tricky
+    });
+
+ }
+</script>
+<body>
+<div class="main-selector">
+ <div><!--Your data here --> </div>
+ <div><!--Your data here -->  </div>
+ <div><!--Your data here  --> </div>
+ <div><!--Your data here -->  </div>
+ <div><!--Your data here  --> </div>
+ <div class='pager'>
+    <a href="URL TO NEXT PAGE" class='next-selector'></a>
+ </div>
+</div>
+</body>
+</html>

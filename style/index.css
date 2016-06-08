@@ -1,0 +1,145 @@
+body{
+background-color:#f5f5f5;
+}
+
+.nav{
+background-color:white;
+   border: 1px  solid white;
+   border-radius:0;>
+}
+.sub{
+border:0px solid white ;
+border-left:1px solid #ccc;
+border-radius:0;
+background-color:white;
+}
+ 
+.sub1{
+border:0px solid white ;
+border-radius:0;
+background-color:white;
+margin-top:10px;
+margin-left:-50px;
+}
+.search:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-right:1px solid #ccc;
+}
+.search{
+width:900px;
+border:0px solid white;
+ border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+border-right:1px solid #ccc;
+border-radius:0;
+}
+
+button:focus {outline:0 !important;}
+.sub:hover{background-color:white;}
+.sub1:hover{background-color:white;}
+.user:hover{background-color:white;}
+
+.btn-file{
+width:100px;border-radius:2px;
+margin-left:270px;
+}
+input[type='file'] {
+  color: transparent;    
+}
+
+
+.row {
+    margin-right: 0px !important;
+	}
+	
+	
+	
+	
+	
+.upload-select-title{
+width:500px;height:250px;
+}
+.modal-title{
+font-size:20px;
+}
+#select1{
+width:310px;
+height:34px;
+}
+.continue,.continue:hover;.continue:focus{
+background-color:#37BC61;
+border-color:#37BC61;
+margin-left: 82px;
+width:310px;
+color:white;
+}
+.continue:hover{
+color:white;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: blue;
+    cursor: inherit;
+    display: block;
+}
+.course{
+color:#37BC61;
+margin-left: 180px;
+}
+.course-content{
+width:800px;
+}
+.course-button,.course-button:hover,.course-button:focus{
+background-color:#37BC61;
+border-color:#37BC61;
+margin-left: 82px;
+width:210px;
+color:white;
+}
+#dept-select{
+width:100px;
+height:40px;
+}
+#year1-select{
+width:100px;
+height:40px;
+}
+#sem-select{
+width:100px;
+height:40px;
+}
+#prof-select{
+width:100px;
+height:40px;
+}
+#course-select{
+width:100px;
+height:40px;
+}
+
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}

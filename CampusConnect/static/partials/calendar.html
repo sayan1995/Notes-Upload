@@ -1,0 +1,27 @@
+<div class="container" ng-controller = "CalendarCtrl" ng-init = "init()">
+   <div class="page-header">
+      <h2 style="text-align:center;" ng-bind = "collegeName"></h2>
+   </div>
+   <div class="row">
+        <h2 style="text-align:left;">Calendar</h2>	
+	</div>
+	<div class="row" style="margin-bottom:4%;">
+
+  		<div class="col-md-11 col-md-offset-1" style="background-color:#EAEBED;">
+    		<div class="row" style="margin-top:5px;margin-left:30%;">
+    			<div style="display:inline;">
+        			<h4 style="float:left; margin-right:10px">Pick a Date</h4>
+        			<md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+        			<button type="button" class="btn btn-sm btn-default" style="margin-left:10px;" ng-click="gettodayevents()">Submit</button>
+      			</div>
+ 		 
+  	  		</div>
+  	<h3 style='text-align:center;' ng-if = "events.length < 1">No Event Listings for today</h3>  		
+	<div class="row" style="margin-top:20px;margin-left:10px;margin-right:10px;margin-bottom:3px" ng-if = "events.length > 0" ng-repeat = "event in events">
+	<a style = "cursor:pointer; cursor:hand"ng-click='go("/"+event.eve_id	)'>
+	<div class="panel panel-default" style="border-left:5px solid orange;"><div class="panel-body"><div class="row"><div class="col-md-1"><img width="50px" height="50px" ng-src="{{ event.club_img }}"></div><div class="col-md-9"><span style="font-size:20px;">{{event.title}}</span><br/><span style="font-size:15px;">{{event.club_name}}</span></div><div class="col-md-2"><span style="font-size:15px;text-align:center;">{{event.start_final}} - {{event.end_final}}</span><br/><span style="font-size:15px;text-align:center;">{{event.venue}}</span></div></div></div></div>
+	</a>
+	</div>
+    	</div>
+    </div>
+</div>

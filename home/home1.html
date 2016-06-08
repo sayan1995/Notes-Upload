@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+   <meta charset="UTF-8">
+    <title>Brick By Brick Demo</title>
+	
+     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!--grid layout-->
+   <script src="../js/brick-by-brick.js"></script>
+   <link rel="stylesheet" href="../style/brick-by-brick.css" />
+<!--grid layout-->
+   <!--sidebar-->  
+  <script src="../js/sidebar.js"></script>
+    <link rel="stylesheet" href="../style/style-sidebar.css" />
+    <link rel="stylesheet" href="../style/sidebar.css"/>
+<script>
+$(document).ready(function(){
+
+ var append=['<div class="ui card bottom" style="background-color:white;border:1px solid #ccc;height:220px;margin-bottom:1px;margin-color:#ccc;width:400px;" id = "card"><center><button id="b1"> +CLICK ME</buton></canter></div>'];
+ //var append=['<div class="ui card bottom" style="background-color:white;border:1px solid #ccc;height:220px;margin-bottom:1px;margin-color:#ccc;width:400px;" id = "card">ssssdcsd</div>'];
+ var append1=['<div class="ui card bottom " style="background-color:white;border:1px solid #ccc;height:220px;margin-bottom:1px;margin-color:#ccc;color:black;width:420px;" id = "card"><div class="row"><div class="course-name"  style="font-size:20px;"> &nbsp <u>COURSE NAME</u></div></div><div class="row" style="margin-top:30px;"><div class="col-xs-1 notes" onclick="alert("notes")" ><div style="">NOTES</div><br><div class="notes-no" style="margin-left:20px;">0</div></div><div class="col-xs-1 col-xs-offset-1 ass" onclick="alert("notes")" style="width:100px;"><div style="margin-left:10px;">  ASSIGNMENTS</div><br><div class="ass-no" style="margin-left:40px;">0</div></div><div class="col-xs-1  exam" onclick="alert("notes")" style="width:100px;"><div style="margin-left:6px;"> &nbsp &nbsp EXAMS</div><br><div class="date-no" style="margin-left:35px;">0</div></div></div></div>']
+			
+ $('#layout').layout({
+ itemMargin: 20,
+ itemPadding: 20
+ }
+ 
+ );
+ $('#layout').layout('addBefore', append1);
+
+	$('#layout').layout('addBefore', append1);
+	$('#layout').layout('addBefore', append1);
+	$('#layout').layout('addBefore', append1);
+	$('#layout').layout('addBefore', append1);
+		$('#layout').layout('addBefore', append);
+	
+		
+	$('#b1').on('click',function(){
+	$('#layout').layout( 'addAfter' , append1);
+	});
+
+	
+	
+
+	});
+</script>
+</head>
+<style>
+
+body{
+background-color:#f5f5f5;
+//overflow-x: hidden;
+}
+   .single-column .b-by-b-item {
+       width: 100%!important;
+    }
+
+    @media (min-width: 0px) and (max-width: 480px) {
+       #layout .b-by-b-item {
+           width: 100%;
+        }
+    }
+
+    @media (min-width: 481px) and (max-width: 1024px) {
+        #layout .b-by-b-item {
+          width: 50%;
+        }
+    }
+
+    @media (min-width: 1025px) {
+       #layout .b-by-b-item {
+         width: 33.33%;
+      } 
+    }
+	.img-circle {
+    border-radius: 50%;
+	margin-left:20px;
+}
+.profile:hover{
+background-color:transparent;
+}
+
+@media (max-width: @screen-xs) {
+    body{font-size: 0px;}
+}
+</style>
+<body>
+<div class="col-xs-12 col-md-12 ">
+<div id="layout" >
+   
+	</div>
+</div>
+
+<!--
+<div class="col-xs-4 col-md-2">
+sdsdsdsd
+sdsdsdsd
+</div>
+<div class="col-xs-8 col-md-10 col-md-offset-2">
+<div id="layout" >
+   
+	</div>
+</div>
+-->
+
+</body>
+</html>

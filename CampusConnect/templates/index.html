@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!-- Bootstrap the angular app after the Google Java Script libraries are loaded. -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Campus Connect</title>
+    <link href="/css/sticky-footer-navbar.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/img/tablogo.png">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-cosmo.css">
+    <link rel="stylesheet" href="/css/offcanvas.css">
+    <meta property="og:title" content="Campus Connect">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="A platform that connects you to your campus community.">
+    <meta property="og:image" content="/img/tablogo.png">
+    <meta property="og:site_name" content="A web app powered by Google App Engine">
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-aria.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.4/angular-material.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.4/angular-material.css">
+    
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
+    <script>
+        /**
+         * Initializes the Google API JavaScript client. Bootstrap the angular module after loading the Google libraries
+         * so that Google JavaScript library ready in the angular modules.
+         */
+        function init() {
+            gapi.client.load('oauth2', 'v2', function () {
+                angular.bootstrap(document, ['conferenceApp']);
+            });
+
+            var ROOT = 'https://campus-connect-2015.appspot.com/_ah/api';
+            gapi.client.load('campusConnectApis', 'v1',null, ROOT);
+            gapi.client.load('clubs', 'v1',null, 'https://campus-connect-2015.appspot.com/_ah/api');
+
+        };
+    </script>
+    <script src="//apis.google.com/js/client:plusone.js?onload=init"></script>
+    <style type="text/css">
+@font-face {
+    font-family: myFirstFont;
+    src: url(/fonts/ProximaNovaRegular.otf);
+}
+
+div {
+    font-family: myFirstFont;
+}
+#samp { 
+  background: url(/img/connect_background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#break{
+background:  #FAD156;
+}
+#featureslist{
+  background:  #383838;
+}
+#white{
+background:  #FFFFFF;
+}
+#grey{
+background:  #eaebec;
+}
+IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
+.navbar {
+   background-color: transparent;
+   background: transparent;
+   border-color: transparent;
+    }
+
+  .navbar li { color: #000 } 
+
+  .ghost-button {
+    color: white;
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 20px;
+    font-size: 15px;
+    padding: 10px 20px;
+    font-weight: normal;
+    display: inline-block;
+    text-decoration: none;
+    min-width: 120px;
+}
+
+.ghost-button:hover, .ghost-button:active {
+  color:#383838;
+  background:#FAD156;
+}
+}
+</style>
+</head>
+
+<!-- Restore the credential from cookie if stored by calling initSignInButton() -->
+<body style="background-image:url('img/bkg.jpg');background-size:cover;background-repeat:no-repeat;">
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#383838;border:0;">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          
+        <a href="/" class="pull-left"><img src="/img/logo.png" style="height:50px;"></a>
+        </div>  
+        <div id="navbar" class="navbar-collapse collapse navbar-right">
+        <!--   <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul> -->
+           <ul class="nav navbar-nav navbar-right">
+                <li><a href="/college#/" style="color:#FEFEFE;font-size:13pt">Explore</a></li>
+                <li><a target="_blank" href="https://play.google.com/store/apps/details?id=com.campusconnect" style="color:#EBD07B;">Get the App</a></li>
+                <li><img id="clickimg" src="img/android.png" class="img-responsive img-circle" alt="App" style="width:40px;height:40px;text-align:center;margin-top:5px;padding-top:5px;padding-bottom:5px;border: 2px solid #EBD07B;border-radius: 25px;"></li>
+               <!--  <li id="signInLink" ng-hide="getSignedInState()"><a ng-click="signIn(); collapseNavbar()">Google+ SignIn</a></li>
+                <li id="signOutLink" ng-show="getSignedInState()"><a ng-click="signOut(); collapseNavbar()">Log out</a></li>  !-->
+            </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+    <div class="container">
+        <ng-view></ng-view>
+    </div>
+    <footer class="footer" style="background-color:#383838;height:100px;">
+            <div class="row" style="text-align:center;">
+               <a href = "https://web.facebook.com/campusconnectcc" target="_blank"><IMG class="displayed"  src="/img/facebook_circle.png" align="center" width="50" height="50" style="padding-top:5pt" ></IMG></a>
+            </div>
+            <div class="row" style="text-align:center;color:white;">
+              <p>Copyright 2015 Campus Connect</p>
+            </div>
+    </footer>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/controllers.js"></script>
+
+</body>
+</html>

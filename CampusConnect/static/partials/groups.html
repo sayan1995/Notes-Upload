@@ -1,0 +1,29 @@
+<style type="text/css">
+    .shado
+    {
+        -moz-box-shadow:    0px 3px #ccc;
+  -webkit-box-shadow: 0px 3px #ccc;
+  box-shadow:         0px 3px #ccc;
+    }
+    .roundo{
+       -moz-border-radius: 6px; 
+ border-radius: 6px;
+    }
+  </style>
+
+<div class="container" ng-controller = "GroupsCtrl" ng-init = "init()">
+   <div class="page-header">
+      <h2 style="text-align:center;" ng-bind = "collegeName"></h2>
+   </div>
+      <div class="row" style="margin-bottom:10px;">
+   <h3>Groups</h3>
+
+   <div class="col-md-12 roundo" style="background-color:#EAEBED;">
+   <div ng-repeat = "group in groups track by group.clubId" >
+      <button type="button"  class="list-group-item shado" style="text-align:left;margin:10px;" ng-click='go("/"+group.clubId);setGroupDetails(group.clubId,group.name)'> <img ng-src="{{ group.photoUrl }}" alt="..." class="img-circle" width="40px" height="40px"><span style="padding-left:10px;">{{ group.abbreviation }}</span></button>
+   </div>
+  
+</div>
+</div> 
+</div>
+    </div>
