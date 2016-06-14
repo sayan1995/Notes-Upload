@@ -99,10 +99,11 @@ background-color:transparent;
 </style>
 <script>
 $(document).ready(function(){
-
- var append=['<div class="ui card bottom" style="background-color:white;border:1px solid #ccc;height:220px;margin-bottom:1px;margin-color:#ccc;width:400px;" id = "card"><center><button id="b1"> +CLICK ME</buton></canter></div>'];
+data={};
+    
+     var append=['<div class="ui card bottom" style="background-color:white;border:1px solid #ccc;height:220px;margin-bottom:1px;margin-color:#ccc;width:400px;" id = "card"><center><button id="b1"> +CLICK ME</buton></canter></div>'];
  //var append=['<div class="ui card bottom" style="background-color:white;border:1px solid #ccc;height:220px;margin-bottom:1px;margin-color:#ccc;width:400px;" id = "card">ssssdcsd</div>'];
- var append1=['<div class="ui card bottom " style="background-color:white;border:1px solid #ccc;height:220px;margin-bottom:1px;margin-color:#ccc;color:black;width:420px;" id = "card"><div class="row"><div class="course-name"  style="font-size:20px;"> &nbsp <u>COURSE NAME</u></div></div><div class="row" style="margin-top:30px;"><div class="col-xs-1 notes" onclick="alert("notes")" ><div style="">NOTES</div><br><div class="notes-no" style="margin-left:20px;">0</div></div><div class="col-xs-1 col-xs-offset-1 ass" onclick="alert("notes")" style="width:100px;"><div style="margin-left:10px;">  ASSIGNMENTS</div><br><div class="ass-no" style="margin-left:40px;">0</div></div><div class="col-xs-1  exam" onclick="alert("notes")" style="width:100px;"><div style="margin-left:6px;"> &nbsp &nbsp EXAMS</div><br><div class="date-no" style="margin-left:35px;">0</div></div></div></div>']
+
 			
  $('#layout').layout({
  itemMargin: 20,
@@ -110,14 +111,59 @@ $(document).ready(function(){
  }
  
  );
- $('#layout').layout('addBefore', append1);
+    
+    $.ajax({
+  type:'GET',
+  dataType: 'json',
+  url: 'https://uploadnotes-2016.appspot.com/_ah/api/notesapi/v1/feed/ahJzfnVwbG9hZG5vdGVzLTIwMTZyFAsSB1Byb2ZpbGUYgICAgLyhggoM?profileId=ahJzfnVwbG9hZG5vdGVzLTIwMTZyFAsSB1Byb2ZpbGUYgICAgLyhggoM',
+  data: data,
+  beforeSend: function (xhr) {
+    if (xhr && xhr.overrideMimeType) {
+      xhr.overrideMimeType('application/json;charset=utf-8');
+    }
+  },
+  success: function (data) {
+      console.log(data);
+      $('img[src="profile.png"]').attr('src', data.photoUrl);
+     //$("#image").src()
+      // alert(data.subscribedCourseList[i].points);
+     $('#pts').text(data.points);
+     $('#pname').text(data.profileName);
+      for(i=0;i<data.subscribedCourseList.length;i++)
+          {//420  
+           
+              
+             
+                var card=['<div class="ui card bottom " style="background-color:white;border:1px solid #ccc;height:160px;;color:black;width:440px;" id = "card">\<div class="row" >\
+                <div class="course-name"  style="font-size:20px;"> &nbsp <u>'+data.subscribedCourseList[i].courseName+'</u></div>\
+                </div>\
+                <div class="row" style="margin-top:20px;">\
+                <div class="col-xs-3 notes" onclick="alert("notes")" style="padding-right:0px;">\
+                <div style="">NOTES</div>\
+                <br>\
+                <div class="notes-no" style="margin-left:20px;">'+data.subscribedCourseList[i].recentNotes+'</div>\
+                </div>\
+                <div class="col-xs-5 col-xs-offset-1 ass" onclick="alert("notes")" style="padding:0px;">\
+                <div>  ASSIGNMENTS</div>\
+                <br>\
+                <div class="ass-no" style="margin-left:40px;">'+data.subscribedCourseList[i].dueAssignments+'</div>\
+                </div>\
+                <div class="col-xs-3  exam" onclick="alert("notes")" style="padding:0px"><div> &nbsp &nbsp EXAMS</div>\
+                <br>\
+                <div class="date-no" style="margin-left:35px;">'+data.subscribedCourseList[i].dueTests+'</div>\
+                </div>\
+                </div>\
+                </div>'];
 
-	$('#layout').layout('addBefore', append1);
-	$('#layout').layout('addBefore', append1);
-	$('#layout').layout('addBefore', append1);
-	$('#layout').layout('addBefore', append1);
-		$('#layout').layout('addBefore', append);
-	
+                
+	           $('#layout').layout('addBefore', card);
+             
+          }
+  }
+});
+    
+    
+
 		
 	$('#b1').on('click',function(){
 	$('#layout').layout( 'addAfter' , append1);
@@ -198,7 +244,10 @@ $(document).ready(function(){
     <div class="row">
       <div class="col-xs-6 col-md-2 sidebar sidebar-left sidebar-animate sidebar-md-show">
         <ul class="nav navbar-stacked">
-		<li><center><a href="#" width="50%" height="50%" class="profile.png"><img src="profile.png" class="img-circle" width="50%" height="50%"></a></center></li>
+		<li><center><a href="#" width="50%" height="50%" class="profile.png"><img id="image" src="profile.png" class="img-circle" width="50%" height="50%"></a></center></li>
+        <li><center><span id="pname">Name</span></center></li>
+        
+        <li><center>Points: &nbsp <span id="pts">0</span></center></li>
 		<br>
 		<div style="border:1px solid #ccc;border-bottom:1px"></div>
           <li class="active"><a href="#">Home</a></li>
