@@ -146,7 +146,7 @@ display:none !important;
     </style>
     <script>
         var descp=[];
-    
+    images=[];
 $(document).ready(function(){
     
      data={"profileId":"ahJzfnVwbG9hZG5vdGVzLTIwMTZyFAsSB1Byb2ZpbGUYgICAgLyhggoM"};
@@ -172,7 +172,10 @@ $(document).ready(function(){
   }
 });
     
-    
+  $('#myCarousel').carousel({
+	           interval: 0
+	       
+            })  
        data={
            "profileId":"ahJzfnVwbG9hZG5vdGVzLTIwMTZyFAsSB1Byb2ZpbGUYgICAgLyhggoM",
            "noteBookId" :"ahJzfnVwbG9hZG5vdGVzLTIwMTZyFQsSCE5vdGVCb29rGICAgICZzpQKDA"
@@ -197,8 +200,121 @@ $(document).ready(function(){
       $("#date-mod").text(data.lastUpdated);
       $("#prof").text("By "+data.uploaderName);
       //alert(data.rated);
-      $(".rating").val(data.rated);
-      
+      //$(".rating").val(data.rated);
+      $('#rating-input').rating({
+              min: 0,
+              max: 5,
+              step:0.5,
+              size: 'xs',
+             
+           });
+           $('#rating-input').rating('update', data.rated);
+      images=data.notes;
+      //alert(images.urlList.length+'s');
+      index=0;
+      for(i=1;i<images.length;i++)
+                   { 
+                    s='Class:'+images[i].classNumber+' '+images[i].date;
+                    //alert(s);
+                    for(j=0;j<images[i].urlList.length;j++)
+                    {console.log(images[i].urlList[j]);
+                        $('<div class="item"><a href="'+images[i].urlList[j]+'"><img id="img-'+index+'" src="'+images[i].urlList[j]+'" alt="'+s+'" descp="'+images[i].description+'"></a></div>').appendTo('.carousel-inner');
+                    index++;
+                    }
+                   }
+                      
+                     $('.item').first().addClass('active');
+                    $('.carousel-indicators > li').first().addClass('active');
+                        $('#myCarousel').carousel();
+                (function(window, Util, PhotoSwipe){
+		  
+		
+		
+				var
+					sayHiEl,
+                    captionText, captionEl,
+					sayHiClickHandler = function(e){
+						alert('Hi!');
+					}
+					options = {
+					  getImageCaption: function(el){
+							
+							// Get the caption from the alt tag
+							if (el.nodeName === "IMG"){
+								captionText = el.getAttribute('alt'); 
+                                
+							}
+							var i, j, childEl;
+							for (i=0, j=el.childNodes.length; i<j; i++){
+								childEl = el.childNodes[i];
+								if (el.childNodes[i].nodeName === 'IMG'){
+									captionText = childEl.getAttribute('alt'); 
+                                   
+								}
+							}
+							 var res = captionText.split(" ");
+							// Return a DOM element with custom styling
+							captionEl = document.createElement('ul');
+                            captionEl1 = document.createElement('li');
+                            captionEl1.style.cssText = 'float: right;';
+                            captionEl1.appendChild(document.createTextNode(res[1]));
+                            captionEl.appendChild(captionEl1);
+       
+                            captionEl2 = document.createElement('li');
+                            captionEl2.style.cssText = 'float: left;';
+                            captionEl2.appendChild(document.createTextNode(res[0]));
+                            captionEl.appendChild(captionEl2);
+                            //document.ppendChild(captionEl);
+							return captionEl;
+							
+							// Alternatively you can just pass back a string. However, any HTML 
+							// markup will be escaped
+							
+						},
+                        
+                        
+						getToolbar: function(el){
+                            //alert('sd');
+                            
+							return '<div class="say-hi comment" style="padding-top: 12px;float:left;margin-left:10px;" ></div>';
+							// NB. Calling PhotoSwipe.Toolbar.getToolbar() wil return the default toolbar HTML
+                        }
+                      
+					
+					
+					},
+					instance = PhotoSwipe.attach( window.document.querySelectorAll('.carousel-inner a'), options  );
+					
+					// onShow - store a reference to our "say hi" button
+					instance.addEventHandler(PhotoSwipe.EventTypes.onShow, function(e){
+						sayHiEl = window.document.querySelectorAll('.say-hi')[0];
+                        
+					});
+					instance.addEventHandler(PhotoSwipe.EventTypes.onDisplayImage, function(e){
+						sayHiEl = window.document.querySelectorAll('.say-hi')[0];
+                        s="#img-"+e.index;
+                        var index1 =$(s).attr('descp');
+						sayHiEl.innerHTML=index1;
+						
+					});
+					// onToolbarTap - listen out for when the toolbar is tapped
+					instance.addEventHandler(PhotoSwipe.EventTypes.onToolbarTap, function(e){
+						if (e.toolbarAction === PhotoSwipe.Toolbar.ToolbarAction.none){
+							if (e.tapTarget === sayHiEl || Util.DOM.isChildOf(e.tapTarget, sayHiEl)){
+								alert('hi!');
+							}
+						}
+					});
+					
+					// onBeforeHide - clean up
+					instance.addEventHandler(PhotoSwipe.EventTypes.onBeforeHide, function(e){
+						sayHiEl = null;
+					});
+					
+			
+			
+			
+		}(window, window.Code.Util, window.Code.PhotoSwipe));
   }
 });
     
@@ -223,110 +339,14 @@ $(document).ready(function(){
                 
             });
             
-            $('#myCarousel').carousel({
-	           interval: 0
-	       
-            })
+            
             
             var i=0;
-    var cname="Class1";
-    var date="26/05/2016"
-    s=cname + ' '+date;
-     s1="Class2 27/05/2016"   
-        
-                    $('#myCarousel').ready( function() {
-    	
-                    $('<div class="item"><a href="anchor.png"><img src="anchor.png" alt="'+s+'" ></a></div>').appendTo('.carousel-inner');
-                    $('<div class="item"><a href="buyer1.png"><img src="buyer1.png" alt="'+s1+'"></a></div>').appendTo('.carousel-inner');
-                     $('.item').first().addClass('active');
-                    $('.carousel-indicators > li').first().addClass('active');
-                        $('#myCarousel').carousel();
-                    
-                    });
-
-            
+    
         
         });
         
-        (function(window, Util, PhotoSwipe){
-		  
-			document.addEventListener('DOMContentLoaded', function(){
-		
-				var
-					sayHiEl,
-					sayHiClickHandler = function(e){
-						alert('Hi!');
-					}
-					options = {
-					
-						getToolbar: function(){
-							return '<div class="say-hi comment" style="padding-top: 12px;float:left;margin-left:10px;" ></div>';
-							// NB. Calling PhotoSwipe.Toolbar.getToolbar() wil return the default toolbar HTML
-						},
-                        getImageCaption: function(el){
-							
-							var captionText, captionEl;
-							
-							// Get the caption from the alt tag
-							if (el.nodeName === "IMG"){
-								captionText = el.getAttribute('alt'); 
-							}
-							var i, j, childEl;
-							for (i=0, j=el.childNodes.length; i<j; i++){
-								childEl = el.childNodes[i];
-								if (el.childNodes[i].nodeName === 'IMG'){
-									captionText = childEl.getAttribute('alt'); 
-								}
-							}
-							 var res = captionText.split(" ");
-							// Return a DOM element with custom styling
-							captionEl = document.createElement('ul');
-                            captionEl1 = document.createElement('li');
-                            captionEl1.style.cssText = 'float: right;';
-                            captionEl1.appendChild(document.createTextNode(res[1]));
-                            captionEl.appendChild(captionEl1);
-       
-                            captionEl2 = document.createElement('li');
-                            captionEl2.style.cssText = 'float: left;';
-                            captionEl2.appendChild(document.createTextNode(res[0]));
-                            captionEl.appendChild(captionEl2);
-                            //document.ppendChild(captionEl);
-							return captionEl;
-							
-							// Alternatively you can just pass back a string. However, any HTML 
-							// markup will be escaped
-							
-						}
-					
-					
-					},
-					instance = PhotoSwipe.attach( window.document.querySelectorAll('.carousel-inner a'), options  );
-					
-					// onShow - store a reference to our "say hi" button
-					instance.addEventHandler(PhotoSwipe.EventTypes.onShow, function(e){
-						sayHiEl = window.document.querySelectorAll('.say-hi')[0];
-                        sayHiEl.innerHTML='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum laoreet, nunc eget laoreet sagittis, quam ligula sodales orci, congue imperdiet eros tortor ac lectus. Duis eget nisl orci. <a href="show more" style="display:inline-block">show more</a>';
-					});
-					
-					// onToolbarTap - listen out for when the toolbar is tapped
-					instance.addEventHandler(PhotoSwipe.EventTypes.onToolbarTap, function(e){
-						if (e.toolbarAction === PhotoSwipe.Toolbar.ToolbarAction.none){
-							if (e.tapTarget === sayHiEl || Util.DOM.isChildOf(e.tapTarget, sayHiEl)){
-								alert('hi!');
-							}
-						}
-					});
-					
-					// onBeforeHide - clean up
-					instance.addEventHandler(PhotoSwipe.EventTypes.onBeforeHide, function(e){
-						sayHiEl = null;
-					});
-					
-					
-			}, false);
-			
-			
-		}(window, window.Code.Util, window.Code.PhotoSwipe));
+        
     </script>
     <body>
     <!-- Fixed navbar -->
@@ -501,7 +521,7 @@ $(document).ready(function(){
   <div id="line" style="border-bottom:1px solid #ccc;"></div>
                  <br>
   <div  style="font-size:20px;"><center>Ratings</center></div>
-<div><center><input id="input-21d" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs"></center></div>
+<div><center><input id="rating-input" type="number"></center></div>
   <div style="font-size:20px;color:grey"><center><i class="glyphicon glyphicon-eye-open"> &nbsp </i><span id="views" style="font-size:25px;font-weight: bold;text-align: center;">0</span></center></div>
 
   <br>
@@ -520,7 +540,7 @@ $(document).ready(function(){
             <button type="button" class="btn btn-default btn-circle msg"><i class="glyphicon glyphicon-envelope"></i></button>  
         </center>  &nbsp &nbsp
     
-<div><center><input id="input-21d" value="5" type="number" class="rating 2" min=0 max=5 step=0.5 data-size="xs"></center></div>
+<div><center><input id="rating-input" type="number"></center></div>
   <div style="font-size:20px;color:grey"><center><i class="glyphicon glyphicon-eye-open"> &nbsp </i><span id="views" style="font-size:25px;font-weight: bold;text-align: center;">0</span></center></div>
           </div>
           <br>

@@ -32,6 +32,9 @@ display:none;
 .clear-rating{
 display:none !important;
 }
+    .caption{
+display:none !important;
+}
 .img-circle {
     border-radius: 50%;
 }
@@ -118,48 +121,173 @@ background-color:blue;
 </style>
 <script>
 $(document).ready(function(){
- s='<div class="ui card bottom " style="background-color:white;border:1px solid #ccc;margin-bottom:1px;margin-color:#ccc;color:black;height:300px;width:100%;" id = "card"><br></div>	';
-//s1='<div class="card card-block " style="background-color:white;border:1px solid #ccc;margin-bottom:1px;margin-color:#ccc;color:black;width:200px;height:300px;" id = "card"><br></div>	';
-s1='<div class="ui card bottom " style="background-color:white;border:1px solid #ccc;margin-bottom:1px;margin-color:#ccc;color:black;height:200px;width:80%;" id = "card"><br><div class="row" style="margin-top:-20px;"><div class="col-xs-8"><div id="course-name" style="font-size:20px;">COURSE NAME</div><div id="prof">By Prof .XYZ</div><br><div id="calendar" style="font-size:10px;"><i class="fa fa-calendar" aria-hidden="true" style="font-size:30px;"></i><span style="font-size:20px; color:#ccc;" id="sun"> S</span><span style="font-size:20px;color:#ccc;" id="mon"> M</span><span style="font-size:20px;color:#ccc;" id="tue"> T</span><span style="font-size:20px;color:#ccc;" id="wed"> W</span><span style="font-size:20px;color:#ccc;" id="thu"> T</span><span style="font-size:20px;color:#ccc;" id="fri"> F</span><span style="font-size:20px;color:#ccc;" id="sat"> S</span></div></div><div class="col-xs-4 hidden-xs"><center><div id="college-name" style=";">College Name</div><br><div id="college-year" style="">Year</div><br><div id="college-branch" style="">Branch</div><br><button id="students" style="width:100px;height:50px;;">Students<div id="student-no">0</div></button></center></div></div></div>	';
-var card=['<div class="ui card bottom " style="background-color:white;border:1px solid #ccc;height:220px;margin-bottom:1px;margin-color:#ccc;color:black;width:410px;" id = "card"><div class="row"><div class="course-name"  style="font-size:20px;"> &nbsp <u>COURSE NAME</u></div></div><div class="row" style="margin-top:30px;"><div class="col-xs-1 notes" onclick="alert("notes")" ><div style="">NOTES</div><br><div class="notes-no" style="margin-left:20px;">0</div></div><div class="col-xs-1 col-xs-offset-1 ass" onclick="alert("notes")" style="width:100px;"><div style="margin-left:10px;">  ASSIGNMENTS</div><br><div class="ass-no" style="margin-left:40px;">0</div></div><div class="col-xs-1  exam" onclick="alert("notes")" style="width:100px;"><div style="margin-left:6px;"> &nbsp &nbsp EXAMS</div><br><div class="date-no" style="margin-left:35px;">0</div></div></div></div>']
-
-var append1=[s1];
-
-//var append2=[s1];
-  
+    bList=[];
+    uList=[];
+     data={"profileId":"ahJzfnVwbG9hZG5vdGVzLTIwMTZyFAsSB1Byb2ZpbGUYgICAgLyhggoM"};
+        
+  $.ajax({
+  type:'GET',
+  dataType: 'json',
+  url: 'https://uploadnotes-2016.appspot.com/_ah/api/notesapi/v1/feed/ahJzfnVwbG9hZG5vdGVzLTIwMTZyFAsSB1Byb2ZpbGUYgICAgLyhggoM',
+  data: data,
+  beforeSend: function (xhr) {
+    if (xhr && xhr.overrideMimeType) {
+      xhr.overrideMimeType('application/json;charset=utf-8');
+    }
+  },
+  success: function (data) {
+      console.log(data);
+      $('img[src="profile.png"]').attr('src', data.photoUrl);
+     //$("#image").src()
+      // alert(data.subscribedCourseList[i].points);
+     $('#pts').text(data.points);
+     $('#pname').text(data.profileName);
+      $('#profile-name').text(data.profileName);
+      $('#profile-pts').text(data.points);
+     // $('#profile-rank').text("0");
+      //$('.filled-stars').val('4');
+      // $('#input21-d').rating('update', 3);
+          $('#rating-input').rating({
+              min: 0,
+              max: 5,
+              step:0.3,
+              size: 'xs',
+              readonly:true
+           });
+           $('#rating-input').rating('update', data.rating);
+  }
+});
+ 
 	$('#layout1').layout({
-		itemMargin: 20,
-		itemPadding: 20
+		itemMargin: 10,
+		itemPadding: 10
 			});
-
- $('#layout1').layout('addBefore', card);
-		$('#layout1').layout('addBefore', card);
-		$('#layout1').layout('addBefore', card);
+    
+    data={
+        "bpid":"ahJzfnVwbG9hZG5vdGVzLTIwMTZyFAsSB1Byb2ZpbGUYgICAgLyhggoM",
+        };
+        $.ajax({
+        type:'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        url: 'https://uploadnotes-2016.appspot.com/_ah/api/notesapi/v1/notebookList',
+        data: JSON.stringify(data),
+        success: function (data) {
+        console.log(data);
+        for(i=0;i<data.noteBookList.length;i++)
+          {
+                  
+        var card=['<div class="ui card bottom " style="background-color:white;border:1px solid #ccc;height:200px;color:black;width:440px;" id = "card" >\
+        <div class="row" >\
+        <div class="col-xs-8">\
+        <div class="course-name"  style="font-size:15px;"> &nbsp '+data.noteBookList[i].courseName+'</div>\
+        <div class="author-name"  style="font-size:10px;"> &nbsp;  &nbsp;By '+data.noteBookList[i].uploaderName+'</div>\
+        </div>\
+        <div class="col-xs-4" style="padding:0px;">\
+        <center><div>Posted on</div>\
+        <div id="date1">'+data.noteBookList[i].lastUpdated+'</div></center>\
+        </div>\
+        </div>\
+        <div class="row" style="margin-left:-6px;margin-top:115px;">\
+        <div class="col-xs-4">\
+        <div><i class="fa fa-eye" aria-hidden="true"></i> '+data.noteBookList[i].views+'</div>\
+        </div>\
+        <div class="col-xs-4">\
+        <div><center><i class="fa fa-star" aria-hidden="true"></i> '+data.noteBookList[i].totalRating+'</center></div>\
+        </div>\
+        <div class="col-xs-3 col-xs-offset-1">\
+        <center><div><i class="fa fa-file" aria-hidden="true"></i> '+data.noteBookList[i].pages+'</center></div>\
+        </div>\
+        </div>\
+        </div>'];
+        bList.push(card);
+            $('#layout1').layout('addBefore', card);  
+          }
+  }
+      });
  
   // $('#layout').layout('addBefore', append2);
   $('.tabs1').on('click',function(){
 	$('#layout1').layout({
-		itemMargin: 20,
-		itemPadding: 20
+		itemMargin: 10,
+		itemPadding: 10
 			});
 
-		$('#layout1').layout('addBefore', card);
-		$('#layout1').layout('addBefore', card);
-		$('#layout1').layout('addBefore', card);
+	       for(i=0;i<bList.length;i++)
+          {
+              
+            $('#layout1').layout('addBefore', bList[i]);
+		
+          }
+                
   
   });
-  
-   $('.tabs2').on('click',function(){
-		$('#layout2').layout({
-			itemMargin: 20,
-			itemPadding: 20
-							});
-	$('#layout2').layout('addBefore', card);
-	$('#layout2').layout('addBefore', card);
-	$('#layout2').layout('addBefore', card);
-  
+    uPressed=0;
+    $('.tabs2').on('click',function(){
+	$('#layout2').layout({
+		itemMargin: 10,
+		itemPadding: 10
+			});
+        if(uPressed==0)
+        {
+        data={
+            "upid":"ahJzfnVwbG9hZG5vdGVzLTIwMTZyFAsSB1Byb2ZpbGUYgICAgLyhggoM",
+        };
+        $.ajax({
+        type:'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        url: 'https://uploadnotes-2016.appspot.com/_ah/api/notesapi/v1/notebookList',
+        data: JSON.stringify(data),
+        success: function (data) {
+        console.log(data);
+        for(i=0;i<data.noteBookList.length;i++)
+          {
+                  
+        var card=['<div class="ui card bottom " style="background-color:white;border:1px solid #ccc;height:200px;color:black;width:440px;" id = "card" >\
+        <div class="row" >\
+        <div class="col-xs-8">\
+        <div class="course-name"  style="font-size:15px;"> &nbsp '+data.noteBookList[i].courseName+'</div>\
+        <div class="author-name"  style="font-size:10px;"> &nbsp;  &nbsp;By '+data.noteBookList[i].uploaderName+'</div>\
+        </div>\
+        <div class="col-xs-4" style="padding:0px;">\
+        <center><div>Posted on</div>\
+        <div id="date1">'+data.noteBookList[i].lastUpdated+'</div></center>\
+        </div>\
+        </div>\
+        <div class="row" style="margin-left:-6px;margin-top:115px;">\
+        <div class="col-xs-4">\
+        <div><i class="fa fa-eye" aria-hidden="true"></i> '+data.noteBookList[i].views+'</div>\
+        </div>\
+        <div class="col-xs-4">\
+        <div><center><i class="fa fa-star" aria-hidden="true"></i> '+data.noteBookList[i].totalRating+'</center></div>\
+        </div>\
+        <div class="col-xs-3 col-xs-offset-1">\
+        <center><div><i class="fa fa-file" aria-hidden="true"></i> '+data.noteBookList[i].pages+'</center></div>\
+        </div>\
+        </div>\
+        </div>'];
+        uList.push(card);
+            $('#layout2').layout('addBefore', card);  
+          }
+  }
+      });
+          uPressed++;
+      }
+        else
+            {
+                
+                  for(i=0;i<uList.length;i++)
+          {
+              
+              	$('#layout2').layout('addBefore', uList[i]);
+		
+          }
+                
+                
+            }
   });
-
+   
  
    /* $('window').on('scroll', function() {
         if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
@@ -167,6 +295,17 @@ var append1=[s1];
         }
     })*/
 
+     pressed=0;//flag for removing scrolling in mobile
+     $('.toggle-left').on('click', function(){ 
+          
+          if (pressed) {
+            $('body').css({overflow: 'none'}); 
+               // $('body').css({postion: ' '});
+            //  var cssObject = $('body').prop('style'); cssObject.removeProperty('position');
+              pressed=0;
+        }else
+                {  $('body').css({overflow: 'hidden'}); pressed++} // $('body').css({position: 'fixed'});  
+     });
  
 
 
@@ -180,37 +319,47 @@ var append1=[s1];
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-	  <button type="button" class="navbar-toggle toggle-left hidden-md hidden-lg" data-toggle="sidebar" data-target=".sidebar-left">
         
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" >
+	  <button type="button" class="navbar-toggle toggle-left hidden-md hidden-lg" data-toggle="sidebar" data-target=".sidebar-left">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+         
+   
+         <button class="btn btn-default sub5 navbar-toggle visible-xs" ><span class="glyphicon glyphicon-bell" ></span></button>
+      <button  class="navbar-toggle collapsed"  aria-expanded="false" style="border:0px solid white;">
+          
+             <a href="#">
+                 <span class="glyphicon glyphicon-search" style="border:0px solid white;"></a><span>
+      </button>
+        
       <a class="navbar-brand" href="#">Brand</a>
+        
     </div>
 
      
-      <form class="navbar-form navbar-left" role="search">
+      <form class="navbar-form navbar-left hidden-xs" role="search">
         <div class="form-group">
-			<button type="submit" class="btn btn-default sub" ><span class="glyphicon glyphicon-search"></button>
-          <input type="text" class="form-control search"  id="search" style="width:700px;">
-		  
-		<span style="background-color:#5cb85c;color:white;" class="btn btn-default btn-success  center"  data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Upload
-     
+			<button type="submit" class="btn btn-default sub " ><span class="glyphicon glyphicon-search" style="width:10px;"></button>
+          <input type="text" class="form-control search "  id="search" style="width:700px;">
+       <div style="background-color:#5cb85c;color:white;" class="btn btn-default btn-success  center"  data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Upload</div>
+                
 		 
 	   </div>
-		
+		 
 		<!--  <input type="file"  class="btn btn-primary btn-success upload"><span class="glyphicon glyphicon-plus"></span> Upload  <span style="background-color:#5cb85c;color:white;" class="btn btn-default btn-success  center" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Upload
         <input type="file"/></span>-->
 	</form>
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+       
       <ul class="nav navbar-nav navbar-right">
-        
-        <li><a href="#"><span class="glyphicon glyphicon-bell" ></span></a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-bell" ></span></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" ></span> </a>
+           
+        
           <ul class="dropdown-menu">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
@@ -219,8 +368,10 @@ var append1=[s1];
             <li><a href="#">Separated link</a></li>
           </ul>
         </li>
+          
       </ul>
     </div><!-- /.navbar-collapse -->
+          
   </div><!-- /.container-fluid -->
 </nav>
 <!--
@@ -241,11 +392,18 @@ var append1=[s1];
   <!-- Begin page content -->
   <div class="container-fluid">
     <div class="row">
-      <div class="col-xs-6 col-md-2 sidebar sidebar-left sidebar-animate sidebar-md-show">
+      <div class="col-xs-6 col-md-2 sidebar sidebar-left sidebar-animate sidebar-md-show" >
         <ul class="nav navbar-stacked">
 		<li><center><a href="#" width="50%" height="50%" class="profile.png"><img src="profile.png" class="img-circle" width="50%" height="50%"></a></center></li>
+		 <li><center><span id="pname">Name</span></center></li>
+        
+        <li><center>Points: &nbsp <span id="pts">0</span></center></li>
 		<br>
 		<div style="border:1px solid #ccc;border-bottom:1px"></div>
+            
+            <li class="visible-xs"><div style="margin-top:5px;margin-left:10px;background-color:#5cb85c;color:white;" class="btn btn-default btn-success  center"  data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Upload</div>
+            <div style="border:1px solid #ccc;border-bottom:1px;margin-top:5px;"></div>
+            </li>
           <li class="active"><a href="#">Home</a></li>
           <li><a href="#about">My Bookmarks</a></li>
 		   <li><a href="#about">My Uploads</a></li>
@@ -269,13 +427,13 @@ var append1=[s1];
 					<br>
 					<div id="course-name" style="font-size:25px;"> PROFILE</div>
 					<br>
-					<div><img src="profile.png" class="img-circle" width="70%" height="70%"> </div>
+					<div><img src="profile.png" class="img-circle" width="40%" height="40%"> </div>
 				</div>
 				<div class="col-xs-4">
 				<br><br><br><br>
-				<div id="name">Name</div><br>
-				<div id="pts">Points</div><br>
-				<div id="rank">Rank</div><br>
+				<div>Name:&nbsp<span id="profile-name">Name</span></div><br>
+				<div>Points:&nbsp<span id="profile-pts"></span></div><br>
+				<div>Rank:&nbsp<span id="profile-rank"></span></div><br>
 				</div>
 			</div>
 			<div class="col-xs-4 hidden-xs" >
@@ -287,7 +445,7 @@ var append1=[s1];
 				
 					<div id="ratings" style="font-size:20px;"><center>Ratings</center></div>
 					<br>
-					<div><center><input id="input-21d" value="5" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" disabled></center></div>
+					<div><center><input id="rating-input" type="number" ></center></div>
     
 					<br>
 		
